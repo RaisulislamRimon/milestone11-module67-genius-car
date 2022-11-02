@@ -7,7 +7,7 @@ const Checkout = () => {
   const { title, price } = service;
   const { user } = useContext(AuthContext);
   return (
-    <div>
+    <div className="my-20">
       <form>
         <h2 className="text-4xl text-center">
           You are about to order: {title}
@@ -42,6 +42,11 @@ const Checkout = () => {
         className="textarea textarea-bordered h-24 w-full"
         placeholder="Your Message"
       ></textarea>
+      <input
+        type="submit"
+        value="Place your order"
+        className="btn btn-primary"
+      />
     </div>
   );
 };
