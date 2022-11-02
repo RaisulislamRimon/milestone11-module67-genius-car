@@ -21,7 +21,7 @@ const Orders = () => {
   }, [user?.email]);
 
   return (
-    <div>
+    <div className="my-20">
       <h2 className="text-4xl">You have {orders?.length} orders</h2>
       <div>
         <div className="overflow-x-auto w-full">
