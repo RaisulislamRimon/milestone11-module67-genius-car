@@ -20,6 +20,26 @@ const Orders = () => {
       .catch((error) => console.log(error));
   }, [user?.email]);
 
+  const handleDelete = (_id) => {
+    const proceed = window.confirm("Are you sure to cancel your order ? ");
+    if (proceed) {
+      fetch(`http://localhost:5000/orders/${_id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data);
+          // setOrders(data);
+          if (data.deletedCount > 0) {
+            alert(`data deleted`);
+            const remaining = orders.filter((odr) => odr._id !== _id);
+            setOrders(remaining);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   return (
     <div className="my-20">
       <h2 className="text-4xl">You have {orders?.length} orders</h2>
@@ -42,7 +62,11 @@ const Orders = () => {
             </thead>
             <tbody>
               {orders.map((order) => (
-                <OrderRow key={order._id} order={order} />
+                <OrderRow
+                  key={order._id}
+                  order={order}
+                  handleDelete={handleDelete}
+                />
               ))}
             </tbody>
           </table>
