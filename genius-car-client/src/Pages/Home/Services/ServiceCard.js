@@ -1,8 +1,9 @@
 import React from "react";
 import { BsArrowRight } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
-  const { img, price, title } = service;
+  const { _id, img, price, title } = service;
   return (
     <div className="card card-compact w-96 bg-base-100 shadow-xl">
       <figure className="m-6">
@@ -14,9 +15,11 @@ const ServiceCard = ({ service }) => {
           <p className="text-orange-600 font-semibold text-xl">
             Price : ${price}
           </p>
-          <button className=" text-orange-600">
-            <BsArrowRight />
-          </button>
+          <Link to={`/checkout/${_id}`}>
+            <button className=" text-orange-600">
+              <BsArrowRight />
+            </button>
+          </Link>
         </div>
       </div>
     </div>
