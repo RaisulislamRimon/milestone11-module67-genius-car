@@ -17,7 +17,7 @@ const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 
 const uri = `mongodb+srv://${dbUser}:${dbPassword}@cluster0.qvkor0j.mongodb.net/?retryWrites=true&w=majority`;
-// console.log(uri);
+console.log(uri);
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -27,6 +27,13 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     const serviceCollection = client.db("geniusCar").collection("services");
+
+    app.get("/services", async (req, res) => {
+      const query = {};
+      const cursor = serviceCollection.find(query);
+      const services = await cursor.toArray();
+      res.send(services);
+    });
   } finally {
   }
 }
