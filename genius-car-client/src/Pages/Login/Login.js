@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import login from "../../assets/images/login/login.svg";
+import loginImg from "../../assets/images/login/login.svg";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Login = () => {
@@ -23,7 +23,7 @@ const Login = () => {
     <div className="hero w-full  my-20">
       <div className="hero-content grid gap-20 md:grid-cols-2 flex-col lg:flex-row">
         <div className="text-center lg:text-left">
-          <img src={login} className="w-3/4" alt="loginImg" />
+          <img src={loginImg} className="w-3/4" alt="loginImg" />
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 my-20 py-20">
           <form onSubmit={handleLogin} className="card-body">
