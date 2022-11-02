@@ -8,6 +8,8 @@ const Checkout = () => {
   const { user } = useContext(AuthContext);
 
   const handlePlaceOrder = (e) => {
+    console.log("form submitted");
+    console.log(e);
     e.preventDefault();
     const form = e.target;
     // const firstName = form.firstName.value;
@@ -15,18 +17,35 @@ const Checkout = () => {
     const name = `${form.firstName.value} ${form.lastName.value}`;
     const phone = form.phone.value;
     // const email = form?.email.value;
-    const email = form?.email || "Unregistered";
+    const email = form?.email?.value || "Unregistered";
     const message = form?.message.value;
 
     const order = {
       service: _id,
       serviceName: title,
-      price: price,
+      price,
       customer: name,
       email,
       phone,
       message,
     };
+
+    fetch(`http://localhost:5000/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(order),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          form.reset();
+          alert(`Order placed successfully`);
+        }
+      })
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -64,17 +83,18 @@ const Checkout = () => {
             readOnly
           />
         </div>
+
+        <textarea
+          name="message"
+          className="textarea textarea-bordered h-24 w-full"
+          placeholder="Your Message"
+        ></textarea>
+        <input
+          type="submit"
+          value="Place your order"
+          className="btn btn-primary"
+        />
       </form>
-      <textarea
-        name="message"
-        className="textarea textarea-bordered h-24 w-full"
-        placeholder="Your Message"
-      ></textarea>
-      <input
-        type="submit"
-        value="Place your order"
-        className="btn btn-primary"
-      />
     </div>
   );
 };
