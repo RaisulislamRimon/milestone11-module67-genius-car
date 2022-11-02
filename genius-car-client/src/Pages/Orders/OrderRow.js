@@ -4,11 +4,6 @@ const OrderRow = ({ order }) => {
   const { serviceName, customer, email, phone, message, price } = order;
   return (
     <tr>
-      <th>
-        <label>
-          <input type="checkbox" className="checkbox" />
-        </label>
-      </th>
       <td>
         <div className="flex items-center space-x-3">
           <div className="avatar">
@@ -20,15 +15,15 @@ const OrderRow = ({ order }) => {
             </div>
           </div>
           <div>
-            <div className="font-bold">{serviceName}</div>
-            <div className="text-sm opacity-50">{message}</div>
+            <div className="font-bold">{customer}</div>
+            <div className="text-sm opacity-50">{phone}</div>
           </div>
         </div>
       </td>
       <td>
-        {customer}
+        {serviceName}
         <br />
-        <span className="badge badge-ghost badge-sm">{email}</span>
+        <span className="badge badge-ghost badge-sm">${price}</span>
       </td>
       <td>{phone}</td>
       <th>

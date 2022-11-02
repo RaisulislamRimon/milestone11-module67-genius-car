@@ -29,21 +29,15 @@ const Orders = () => {
             {/* <!-- head --> */}
             <thead>
               <tr>
-                <th>
-                  <label>
-                    <input type="checkbox" className="checkbox" />
-                  </label>
-                </th>
                 <th>Name</th>
                 <th>Job</th>
                 <th>Favorite Color</th>
-                <th></th>
+                <th>Message</th>
               </tr>
             </thead>
             <tbody>
               {orders.map((order) => (
                 <OrderRow key={order._id} order={order} />
-                // <h1>hello</h1>
               ))}
             </tbody>
           </table>
