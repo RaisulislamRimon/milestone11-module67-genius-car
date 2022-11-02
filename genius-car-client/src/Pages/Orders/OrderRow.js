@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const OrderRow = ({ order }) => {
-  const { serviceName, service, customer, email, phone, message, price } =
+  const { _id, serviceName, service, customer, email, phone, message, price } =
     order;
 
   const [orderService, setOrderService] = useState([]);
@@ -12,10 +12,25 @@ const OrderRow = ({ order }) => {
       .then((data) => setOrderService(data));
   }, [service]);
 
+  const handleDelete = (_id) => {
+    const proceed = window.confirm("Are you sure to cancel your order ? ");
+    if (proceed) {
+      fetch(`http://localhost:5000/orders/${_id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err));
+    }
+  };
+
   return (
     <tr>
       <th>
-        <button className="btn btn-square btn-outline">
+        <button
+          onClick={() => handleDelete(_id)}
+          className="btn btn-square btn-outline"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
